@@ -1,15 +1,15 @@
 class Car:
     def __init__(
             self,
-            comfort_class,
-            clean_mark,
-            brand
-    ):
+            comfort_class: int,
+            clean_mark: int,
+            brand: str
+    ) -> None:
         self.comfort_class = comfort_class
         self.clean_mark = clean_mark
         self.brand = brand
 
-    def info(self):
+    def info(self) -> None:
         print(f"comfort class to {self.comfort_class}")
         print(f"clean mark to {self.clean_mark}")
         print(f"brand to {self.brand}")
@@ -18,11 +18,11 @@ class Car:
 class CarWashStation:
     def __init__(
             self,
-            distance_from_city_center,
-            clean_power,
-            average_rating,
-            count_of_ratings
-    ):
+            distance_from_city_center: int,
+            clean_power: int,
+            average_rating: int,
+            count_of_ratings: int
+    ) -> None:
         self.price = 0
         self.serve_cars_list: list[Car] = []
         self.distance_from_city_center = distance_from_city_center
@@ -30,7 +30,7 @@ class CarWashStation:
         self.average_rating = average_rating
         self.count_of_ratings = count_of_ratings
 
-    def serve_cars(self, cars: list[Car]):
+    def serve_cars(self, cars: list[Car]) -> float:
         price = 0.0
 
         for car in cars:
@@ -40,22 +40,22 @@ class CarWashStation:
                 self.wash_single_car(car)
         return round(price, 2)
 
-    def calculate_washing_price(self, car: Car):
+    def calculate_washing_price(self, car: Car) -> float:
         difference = self.clean_power - car.clean_mark
         if difference > 0:
-            a = (car.comfort_class * difference * self.average_rating)
-            return round((a / self.distance_from_city_center), 1)
+            too_long = (car.comfort_class * difference * self.average_rating)
+            return round((too_long / self.distance_from_city_center), 1)
         else:
             return 0.0
 
-    def wash_single_car(self, car: Car):
+    def wash_single_car(self, car: Car) -> bool:
         difference = self.clean_power - car.clean_mark
         if difference > 0:
             car.clean_mark = self.clean_power
             return True
         return False
 
-    def rate_service(self, rating):
+    def rate_service(self, rating: int) -> float:
         old_avg = self.average_rating
         old_cnt = self.count_of_ratings
 
