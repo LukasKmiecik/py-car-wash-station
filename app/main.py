@@ -38,13 +38,13 @@ class CarWashStation:
             if difference > 0:
                 price += self.calculate_washing_price(car)
                 self.wash_single_car(car)
-        return round(price, 2)
+        return round(price, 1)
 
     def calculate_washing_price(self, car: Car) -> float:
         difference = self.clean_power - car.clean_mark
         if difference > 0:
-            too_long = (car.comfort_class * difference * self.average_rating)
-            return round((too_long / self.distance_from_city_center), 1)
+            raw_cost = (car.comfort_class * difference * self.average_rating)
+            return round((raw_cost / self.distance_from_city_center), 1)
         else:
             return 0.0
 
